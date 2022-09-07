@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script type="text/babel">
+        /*
+            (Quiz) moment JS CDN을 적용시켜 1초에 한 번씩 시간이 바뀌는 시계를 구현(moment js api docs 참고)
+        */
+       
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        function startRendering(){
+            const time = moment().format('YYYY-MM-DD A hh:mm:ss');
+            app.render(
+                <h1>현재 시각 : {time}</h1>
+            );
+        }
+
+        startRendering();
+        setInterval(startRendering, 1000);
+    </script>
+</body>
+</html>

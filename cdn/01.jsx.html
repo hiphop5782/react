@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const number = 10;
+        const name = '피카츄';
+        const lotto = [5, 13, 15, 23, 41, 44];
+        const member = {
+            id:"admin", 
+            password:"1234"
+        };
+
+        //JSX(Javascript XML)
+        //Javascript에 XML을 추가하여 확장한 문법 체계
+        //리액트 출력 구문
+        //값을 출력하고 싶을 경우 중괄호를 사용하여 데이터를 내부에 작성
+        //속성은 camel case를 사용하며, 특히 class가 className으로 처리됨을 유의할 것
+        //객체는 직접 출력이 불가능하며, JSON.stringify 혹은 속성만 출력 가능
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(
+            //반드시 1개의 Parent Element 내부에 내용이 위치해야함. 태그를 생성하지 않으려면 <></>로 감쌀 것
+            <>
+                <h1>name is {name}</h1>
+                <h1>number is {number}</h1>
+                <h1>lotto = {lotto}</h1>
+                <h1>{lotto[0]}, {lotto[1]}, {lotto[2]}, {lotto[3]}, {lotto[4]}, {lotto[5]}</h1>
+                <h1>id = {member.id}, password = {member.password}</h1>
+                <pre>{JSON.stringify(member, null, 2)}</pre>
+            </>
+        );
+    </script>
+</body>
+</html>

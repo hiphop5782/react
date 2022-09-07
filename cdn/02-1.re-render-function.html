@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //데이터가 변하게 되면 render를 다시 호출해야함
+        //최초 렌더링과 갱신 렌더링의 중복이 발생하므로 함수화 하면 좋음
+
+        let number = 0;
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        function startRendering(){
+            app.render(
+                <h1>number is {number}</h1>
+            );
+        }
+
+        startRendering();
+        setInterval(()=>{
+            number++;
+            startRendering();
+        }, 1000);
+    </script>
+</body>
+</html>

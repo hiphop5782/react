@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        let userId = "";
+        const userIdRegex = /^[a-z][a-z0-9]{7,19}$/g;
+        let userIdMessage = "";
+        function checkUserId(e){
+            userId = e.target.value;
+            console.log(userId);
+            console.log(userIdRegex.test(userId));
+            if(userIdRegex.test(userId)) { 
+                userIdMessage = "멋진 아이디네요!";
+            }
+            else {
+                userIdMessage = "아이디는 영문소문자로 시작하며 영문소문자와 숫자 포함 8~20자로 작성하세요";
+            }
+            console.log(userIdMessage);
+            startRendering();
+        };
+        
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        function startRendering(){
+            app.render(
+                //JSX에서는 모든 태그가 닫혀 있어야 한다
+                //<input>이 아니라 <input/>
+                <div>
+                    <input type="text" onInput={checkUserId}/>
+                    <span>{userIdMessage}</span>
+                </div>
+            );
+        };
+        startRendering();
+    </script>
+</body>
+</html>
