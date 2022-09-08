@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        class IdInputComponent extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    id:"",
+                    get valid(){
+                        return /^[a-z][a-z0-9]{7,19}$/.test(this.id);
+                    },
+                };
+            }
+            render(){
+                return (
+                    <div className="row mt-3">
+                        <div className="col-md-3">
+                            <label>ID</label>
+                        </div>
+                        <div className="col-md-9">
+                            <input type="text" className={"form-control "}/>
+                        </div>
+                    </div>                
+                );
+            }
+            updateValue = ()=>{
+
+            };
+        }
+        class PasswordInputComponent extends React.Component {
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return (
+                    <div className="row mt-3">
+                        <div className="col-md-3">
+                            <label>Password</label>
+                        </div>
+                        <div className="col-md-9">
+                            <input type="password" className="form-control"/>
+                        </div>
+                    </div>
+                );
+            }
+        }
+        class MainComponent extends React.Component {
+            constructor(props){
+                super(props);
+            }            
+            render(){
+                return (
+                    <div className="container">
+                        <IdInputComponent/>
+                        <PasswordInputComponent/>
+                    </div>
+                );
+            }
+        }
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(
+            <MainComponent/>
+        );
+    </script>
+</body>
+</html>
