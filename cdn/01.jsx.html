@@ -39,6 +39,7 @@
         const app = ReactDOM.createRoot(document.querySelector("#app"));
         app.render(
             //반드시 1개의 Parent Element 내부에 내용이 위치해야함. 태그를 생성하지 않으려면 <></>로 감쌀 것
+            //<React.StrictMode>는 구버전에 대한 경고를 띄워주는 개발용 태그
             <>
                 <h1>name is {name}</h1>
                 <h1>number is {number}</h1>

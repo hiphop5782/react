@@ -28,11 +28,17 @@
 
         const app = ReactDOM.createRoot(document.querySelector("#app"));
         app.render(
-            <h1>number is {number}</h1>
+            <React.StrictMode>
+                <h1>number is {number}</h1>
+            </React.StrictMode>
         );
 
         setInterval(()=>{
-            app.render(<h1>number is {number}</h1>);
+            app.render(
+                <React.StrictMode>
+                    <h1>number is {number}</h1>
+                </React.StrictMode>
+            );
             number++;
         }, 1000);
     </script>

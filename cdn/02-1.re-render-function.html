@@ -30,7 +30,9 @@
         const app = ReactDOM.createRoot(document.querySelector("#app"));
         function startRendering(){
             app.render(
-                <h1>number is {number}</h1>
+                <React.StrictMode>
+                    <h1>number is {number}</h1>
+                </React.StrictMode>
             );
         }
 
