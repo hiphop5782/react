@@ -42,6 +42,8 @@
                 cart : [],
             };
 
+            
+
             addCart = menu=>{
                 const {cart} = this.state;
                 //console.log(cart.some(c=>c.name === menu.name));
@@ -56,7 +58,7 @@
                     });
                 }
                 else {
-                    nextCart = [...cart, {name:menu.name, count:1}];
+                    nextCart = [...cart, {name:menu.name, price:menu.price, count:1, }];
                 }
 
                 this.setState({cart:nextCart});
@@ -69,7 +71,7 @@
             };
 
             render(){
-                
+
                 const {menuList, cart} = this.state;
 
                 const menuElements = menuList.map(menu=>{
@@ -84,15 +86,20 @@
                     );
                 });
 
-                const cartElement = cart.map(cart=>{
+                const cartElement = cart.map(c=>{
                     return (
-                        <li key={cart.name}>
-                            <span>{cart.name}</span>
-                            <input type="text" value={cart.count} readOnly/>
-                            <span onClick={()=>this.deleteCart(cart.name)}>x</span>
+                        <li key={c.name}>
+                            <span>{c.name}</span>
+                            <input type="text" value={c.count} readOnly size="3"/>
+                            &nbsp;&nbsp;
+                            <span>({c.count * c.price}원)</span>
+                            &nbsp;&nbsp;
+                            <span onClick={()=>this.deleteCart(c.name)}>x</span>
                         </li>
                     );
                 });
+
+                const total = cart.reduce((p, c)=>p + c.count * c.price , 0);
 
                 return (
                     <>
@@ -101,6 +108,8 @@
                         <hr/>
                         <h1>주문내역</h1>
                         <ul>{cartElement}</ul>
+                        <hr/>
+                        <h1>금액 : {total}원</h1>
                     </>
                 );
             }
