@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //react component class
+        //- 클래스 형태로 작성하며 자바와 유사한 형태를 가짐
+        //- React.Component를 상속받아 구현
+        //- constructor - 생성자 함수. 속성 설정 및 기본 데이터 초기화
+        //- render - 렌더링 함수
+        //- state - Component에서 사용하는 내부 데이터
+        class App extends React.Component {
+            //state는 이 컴포넌트에서 사용할 데이터를 객체로 정의한다.
+            //변경은 setState 함수를 사용한다
+            state = {
+                menuList : [
+                    {no:1, name:"자장면", price:7000},
+                    {no:2, name:"짬뽕", price:8000},
+                    {no:3, name:"볶음밥", price:7500},
+                    {no:4, name:"탕수육", price:16000},
+                    {no:5, name:"깐쇼새우", price:25000},
+                ],
+                cart : [],
+            };
+
+            addCart = menu=>{
+                const {cart} = this.state;
+                //console.log(cart.some(c=>c.name === menu.name));
+                
+                let nextCart;
+                if(cart.some(c=>c.name === menu.name)){
+                    nextCart = cart.map(c=>{
+                        if(c.name === menu.name){
+                            c.count += 1;
+                        }
+                        return c;
+                    });
+                }
+                else {
+                    nextCart = [...cart, {name:menu.name, count:1}];
+                }
+
+                this.setState({cart:nextCart});
+            };
+
+            deleteCart = name=>{
+                const {cart} = this.state;
+                
+                this.setState({cart : cart.filter(c=>c.name !== name)});
+            };
+
+            render(){
+                
+                const {menuList, cart} = this.state;
+
+                const menuElements = menuList.map(menu=>{
+                    return (
+                        <li key={menu.no}>
+                            <span>{menu.name}</span>
+                            &nbsp;&nbsp;
+                            <span>({menu.price}원)</span>
+                            &nbsp;&nbsp;
+                            <button onClick={()=>this.addCart(menu)}>담기</button>
+                        </li>
+                    );
+                });
+
+                const cartElement = cart.map(cart=>{
+                    return (
+                        <li key={cart.name}>
+                            <span>{cart.name}</span>
+                            <input type="text" value={cart.count} readOnly/>
+                            <span onClick={()=>this.deleteCart(cart.name)}>x</span>
+                        </li>
+                    );
+                });
+
+                return (
+                    <>
+                        <h1>메뉴판</h1>
+                        <ul>{menuElements}</ul>
+                        <hr/>
+                        <h1>주문내역</h1>
+                        <ul>{cartElement}</ul>
+                    </>
+                );
+            }
+        }
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(
+            //class 이름을 태그로 사용
+            <App/>
+        );
+    </script>
+</body>
+</html>
