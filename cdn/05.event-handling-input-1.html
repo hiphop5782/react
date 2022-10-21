@@ -22,29 +22,19 @@
     <!-- 바벨 CDN(using JSX) -->
     <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        //데이터를 일일이 관리하기는 너무 피곤하다
-        let userId = "";
-        const userIdRegex = /^[a-z][a-z0-9]{7,19}$/;
-        let userIdMessage = "";
-        function checkUserId(e){
-            userId = e.target.value;
-            if(userIdRegex.test(userId)) { 
-                userIdMessage = "멋진 아이디네요!";
-            }
-            else {
-                userIdMessage = "아이디는 영문소문자로 시작하며 영문소문자와 숫자 포함 8~20자로 작성하세요";
-            }
+        let text = "";
+        function setText(e){
+            text = e.target.value;
+            //text = this.value;
             startRendering();
-        };
+        }
         
         const app = ReactDOM.createRoot(document.querySelector("#app"));
         function startRendering(){
             app.render(
-                //JSX에서는 모든 태그가 닫혀 있어야 한다
-                //<input>이 아니라 <input/>
                 <div>
-                    <input type="text" onInput={checkUserId}/>
-                    <span>{userIdMessage}</span>
+                    <input type="text" onInput={setText}/>
+                    <span>{text.length}</span>
                 </div>
             );
         };

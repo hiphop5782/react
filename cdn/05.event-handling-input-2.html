@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        let nickname = "";
+        function setNickname(e){
+            nickname = e.target.value;
+            startRendering();
+        }
+
+        const regex = /^[가-힣0-9]{2,10}$/;
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        function startRendering(){
+            //닉네임의 상태에 따라 다른 화면을 렌더링
+            let resultSpan;
+            if(nickname.length == 0){
+                resultSpan = <span></span>
+            }
+            else {
+                const judge = regex.test(nickname);
+                if(judge){
+                    resultSpan = <span>멋진 닉네임입니다!</span>
+                }
+                else {
+                    resultSpan = <span>닉네임은 한글과 숫자 2~10글자로 작성해주세요</span>
+                }
+            }
+
+            app.render(
+                <div>
+                    <input type="text" onInput={setNickname}/>
+                    {resultSpan}
+                </div>
+            );
+        };
+        startRendering();
+    </script>
+</body>
+</html>
