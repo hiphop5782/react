@@ -22,18 +22,35 @@
     <!-- 바벨 CDN(using JSX) -->
     <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        let count = 0;
-        function increaseCount(){
-            count++;
+        let width = 200;
+        let height = 200;
+        function small(){
+            width = 100;
+            height = 100;
             startRendering();
-        };
-        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        }
+        function normal(){
+            width = 200;
+            height = 200;
+            startRendering();
+        }
+        function big(){
+            width = 300;
+            height = 300;
+            startRendering();
+        }
         function startRendering(){
             app.render(
-                <h1 onClick={increaseCount}>click count is {count}</h1>
+                <>
+                    <button onClick={small}>small</button>
+                    <button onClick={normal}>normal</button>
+                    <button onClick={big}>big</button>
+                    <hr/>
+                    <img src="./image/background.jpg" width={width} height={height}/>
+                </>
             );
         }
-
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
         startRendering();
     </script>
 </body>

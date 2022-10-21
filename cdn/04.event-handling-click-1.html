@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        let color = "black";
+        function red(){
+            color = "red";
+            startRendering();
+        }
+        function green(){
+            color = "green";
+            startRendering();
+        }
+        function blue(){
+            color = "blue";
+            startRendering();
+        }
+        function startRendering(){
+            app.render(
+                <>
+                    <button onClick={red}>red</button>
+                    <button onClick={green}>green</button>
+                    <button onClick={blue}>blue</button>
+                    <h1 style={{color:color}}>Hello React JS</h1>
+                </>
+            );
+        }
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        startRendering();
+    </script>
+</body>
+</html>
