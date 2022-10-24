@@ -40,7 +40,19 @@
                 };
             }
 
+            //React Lifecycle 함수
+            //1. 생성자 함수
+            //2. getDerivedStateFromProps (since react 16.3) - 마운트, 업데이트시 호출되는 메소드(props -> states 동기화 시 사용)
+            //3. componentDidMount - 첫 렌더링 이후
+            //4. shouldComponentUpdate - props나 state 변경 시 렌더링을 시작할 지 결정
+            //5. getSnapshotBeforeUpdate - 렌더링 결과 반영 직전
+            //6. componentDidUpdate - 재 렌더링 이후
+            //7. componentWillUnmount - 컴포넌트가 DOM에서 제거될 때
+            //8. componentDidCatch(since react 16) - 컴포넌트 렌더링 과정에서 오류가 발생했을 때
+
+            //componentWillMount는 deprecated 되었다(react 16)
             async componentDidMount(){
+                console.log("componentDidUnmount");
                 this.setState({loading:true});//render를 다시 실행하게 하려면 상태가 변해야 한다.
                 const resp = await axios({
                     url:"https://reqres.in/api/users?page=1",
@@ -48,6 +60,10 @@
                 })
                 this.state.items = resp.data;
                 this.setState({loading:false});//render를 다시 실행하게 하려면 상태가 변해야 한다.
+            }
+
+            componentWillUnmount(){
+                console.log("componentWillUnmount");
             }
 
 
