@@ -22,14 +22,39 @@
     <!-- 바벨 CDN(using JSX) -->
     <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const number = 10;
         const name = '피카츄';
-        const lotto = [5, 13, 15, 23, 41, 44];
+        const number = 12.345;
+        
+        const value = 5;
+        let el;
+        if(value % 2 == 0){
+            el = <h1>{value} is 짝수</h1>
+        }
+        else {
+            el = <h1>{value} is 홀수</h1>
+        }
+
         const member = {
             id:"admin", 
+            nickname:"관리자",
             password:"1234"
         };
 
+        const lotto = [5, 13, 15, 23, 41, 44];
+        const lottoElement = lotto.map(number=><h2>{number}</h2>);
+
+        const monsterList = [
+            {no : 1 , name : "이상해씨", type:"풀"},
+            {no : 4 , name : "파이리", type:"불꽃"},
+            {no : 7 , name : "꼬부기", type:"물"},
+            {no : 25 , name : "피카츄", type:"전기"},
+            {no : 26 , name : "라이츄", type:"전기"}
+        ];
+        const monsterElements = monsterList.map(monster=>
+            <h2 key={monster.no}>번호 : {monster.no}, 이름 : {monster.name}, 속성 : {monster.type}</h2>
+        );
+
+        
         //JSX(Javascript XML)
         //Javascript에 XML을 추가하여 확장한 문법 체계
         //리액트 출력 구문
@@ -41,12 +66,27 @@
             //반드시 1개의 Parent Element 내부에 내용이 위치해야함. 태그를 생성하지 않으려면 <></>로 감쌀 것
             //<React.StrictMode>는 구버전에 대한 경고를 띄워주는 개발용 태그
             <>
-                <h1>name is {name}</h1>
-                <h1>number is {number}</h1>
-                <h1>lotto = {lotto}</h1>
-                <h1>{lotto[0]}, {lotto[1]}, {lotto[2]}, {lotto[3]}, {lotto[4]}, {lotto[5]}</h1>
-                <h1>id = {member.id}, password = {member.password}</h1>
-                <pre>{JSON.stringify(member, null, 2)}</pre>
+                <h1>Your name is {name}</h1>
+
+                <h1>Number : {number} , Round Number : {parseInt(number)}</h1>
+
+                <h1>{value} is {value % 2 == 0 ? '짝수' : '홀수' }</h1>
+
+                <h1>{el}</h1>
+
+                <h1>회원 정보</h1>
+                <ul>
+                    <li>아이디 : {member.id}</li>
+                    <li>닉네임 : {member.nickname}</li>
+                    <li>비밀번호 : {member.password}</li>
+                </ul>
+
+                <h1>로또번호</h1>
+                {lottoElement}
+
+                <h1>몬스터 목록</h1>
+                {monsterElements}
+
             </>
         );
     </script>
