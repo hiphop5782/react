@@ -26,11 +26,15 @@
         //- 클래스보다 간소화된 컴포넌트 형태
         //- 초기화 및 사용 방법이 다름
         //- 함수 이름이 태그 이름이며, JSX를 반환하도록 작성해야함
+
+        //state는 useState 함수로 선언
+        //- const [이름, 세터함수] = React.useState(초기값);
+        //- 변경은 반드시 세터함수를 사용해야 함
         function MainComponent(){
-            const name = "functional component";
+            const [name, setName] = React.useState("피카츄");
             return (
                 <>
-                    <h1>This is {name}</h1>
+                    <h1>Name is {name}</h1>
                 </>
             );
         }
