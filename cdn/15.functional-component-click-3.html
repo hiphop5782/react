@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //함수형 컴포넌트(Functional Component)
+        //- 클래스보다 간소화된 컴포넌트 형태
+        //- 초기화 및 사용 방법이 다름
+        //- 함수 이름이 태그 이름이며, JSX를 반환하도록 작성해야함
+
+        //state는 useState 함수로 선언
+        //- const [이름, 세터함수] = React.useState(초기값);
+        //- 변경은 반드시 세터함수를 사용해야 함
+        function MainComponent(){
+            const [size, setSize] = React.useState(16);
+
+            const increase = ()=>{
+                if(size == 30) return;
+                setSize(size + 1);
+            };
+            const decrease = ()=>{
+                if(size == 5) return;
+                setSize(size - 1);
+            };
+
+            const style = {
+                fontSize : size
+            };
+
+            return (
+                <>
+                    <button onClick={decrease}>-</button>
+                    <span>{size}</span>
+                    <button onClick={increase}>+</button>
+                    <hr/>
+                    <p style={style}>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat egestas lacus, eu mollis massa elementum vel. In eleifend metus quis dui maximus feugiat. Nunc aliquet laoreet libero, ornare molestie sapien mattis id. Sed ut sagittis sapien. Maecenas ut magna ut libero condimentum scelerisque at vitae tortor. Vestibulum ut ligula quis eros ullamcorper lobortis. Maecenas nec lacus lacinia, consectetur neque ut, mattis leo. Integer convallis interdum mauris sit amet porta.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus, risus vestibulum volutpat egestas, odio dui porttitor lectus, at hendrerit ex nisi non mi. Duis rhoncus sodales ex. Nunc facilisis tincidunt aliquam. Nullam quis ornare quam. Nam commodo neque sit amet blandit auctor. Duis non ligula fermentum, fermentum neque vel, cursus lorem. Quisque mollis bibendum scelerisque. Nam gravida accumsan cursus. Pellentesque rutrum, ligula ultricies consequat finibus, ligula augue interdum elit, vel varius nisl urna tincidunt leo. Maecenas metus orci, eleifend sit amet sapien et, rhoncus porttitor metus.
+                        Donec pretium ut nisi nec lacinia. Pellentesque efficitur at leo et tempor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque malesuada vel felis eu volutpat. Donec rutrum arcu in purus luctus consectetur. Phasellus ut dictum tellus, a vulputate sapien. Etiam blandit velit nibh, sit amet vulputate nulla fringilla id. Nam in odio tincidunt, suscipit nisl ac, volutpat nisi. Proin in turpis nisi. Duis congue aliquet dolor, id ornare metus rutrum ac. Vivamus sed magna ipsum. Praesent semper erat nec ex commodo, a vehicula purus tempus. Donec cursus pharetra arcu, non tristique ipsum faucibus id. Suspendisse id ex a purus condimentum tempor. Duis aliquam tellus vitae erat bibendum dapibus. Curabitur venenatis, arcu at tincidunt tristique, nunc orci hendrerit est, ac ullamcorper nisl turpis quis erat.
+                        In hac habitasse platea dictumst. Duis rhoncus pellentesque dolor, id tincidunt orci sagittis sit amet. Donec quis gravida lectus, sed dictum ex. Vivamus tempor imperdiet quam sit amet consectetur. Mauris arcu odio, vehicula in dignissim vitae, accumsan vitae ipsum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur vel erat ante. Phasellus metus nisl, lacinia ac quam id, tempus ullamcorper sem. In facilisis, purus vitae ultrices pharetra, mi nisl cursus velit, at consectetur libero metus et est.
+                        Maecenas at nisi tincidunt, tristique tortor condimentum, venenatis turpis. Cras eu tellus tincidunt, commodo dolor quis, placerat est. Integer egestas ligula nec tellus bibendum tempor. Sed eleifend est odio. Proin malesuada felis id nisl mattis, non vestibulum augue pretium. Donec vel risus risus. Etiam vitae tellus sit amet nibh pretium porttitor. Phasellus interdum tellus rutrum nisi venenatis viverra. Integer quis risus sed nibh suscipit ornare. Pellentesque consectetur ullamcorper scelerisque. Praesent lacinia erat id turpis maximus, non egestas orci dapibus. Nam elementum lectus risus, vitae pulvinar metus egestas nec. In at auctor elit. Curabitur id sem sed lectus congue ultrices ac et dui.
+                    </p>
+                </>
+            );
+        }
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(<MainComponent/>);
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //함수형 컴포넌트(Functional Component)
+        //- 클래스보다 간소화된 컴포넌트 형태
+        //- 초기화 및 사용 방법이 다름
+        //- 함수 이름이 태그 이름이며, JSX를 반환하도록 작성해야함
+
+        //state는 useState 함수로 선언
+        //- const [이름, 세터함수] = React.useState(초기값);
+        //- 변경은 반드시 세터함수를 사용해야 함
+        function MainComponent(){
+            const [width, setWidth] = React.useState(200);
+            const [height, setHeight] = React.useState(200);
+            
+            //function
+            function changeSize1(width, height){
+                setWidth(width);
+                setHeight(height);
+            }
+            //function variable
+            const changeSize2 = function(width, height){
+                setWidth(width);
+                setHeight(height);
+            }
+
+            //arrow function
+            const changeSize3 = (width, height)=>{
+                setWidth(width);
+                setHeight(height);
+            };
+
+            return (
+                <>
+                    <button onClick={()=>changeSize1(100, 100)}>small</button>
+                    <button onClick={()=>changeSize1(200, 200)}>normal</button>
+                    <button onClick={()=>changeSize1(300, 300)}>big</button>
+                    <hr/>
+                    <button onClick={()=>changeSize2(100, 100)}>small</button>
+                    <button onClick={()=>changeSize2(200, 200)}>normal</button>
+                    <button onClick={()=>changeSize2(300, 300)}>big</button>
+                    <hr/>
+                    <button onClick={()=>changeSize3(100, 100)}>small</button>
+                    <button onClick={()=>changeSize3(200, 200)}>normal</button>
+                    <button onClick={()=>changeSize3(300, 300)}>big</button>
+                    <hr/>
+                    <img src="./image/background.jpg" width={width} height={height}/>
+                </>
+            );
+        }
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(<MainComponent/>);
+    </script>
+</body>
+</html>
