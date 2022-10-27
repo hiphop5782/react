@@ -23,11 +23,34 @@
     <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         class MainComponent extends React.Component {
-            //render 함수 - 화면을 출력하는 함수
+            state = {
+                monsters : ["피카츄", "라이츄", "파이리", "꼬부기", "버터플", "리자드", "리자몽", "어니부기", "거북왕", "야도란", "또가스", "뮤", "뮤츠"],
+                results:[],
+            };
+
+            search = e=>{
+                const keyword = e.target.value;
+                if(!keyword) return;
+
+                const newResult = this.state.monsters.filter(monster=>monster.indexOf(keyword) >= 0);
+                this.setState({results:newResult});
+            };
+         
             render(){
+                
+                const {monsters, results} = this.state;
+
+                const resultList = results.map((monster, index) => {
+                    return (
+                        <li key={monster}>{monster}</li>
+                    );
+                });
+
                 return (
                     <>
-                        <h1>This is class component</h1>
+                        <h1>포켓몬스터 도감</h1>
+                        <input onInput={this.search} placeholder="이름 입력"/>
+                        <ul>{resultList}</ul>
                     </>
                 );
             }

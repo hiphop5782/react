@@ -32,21 +32,31 @@
             //state는 이 컴포넌트에서 사용할 데이터를 객체로 정의한다.
             //변경은 setState 함수를 사용한다
             state = {
-                style : {
-                    width:200,
-                    height:200,
+                member : {
+                    memberId:"",
+                    memberNick:"",
+                    memberPhone:"",
                 }
             };
+            setValue = (e)=>{
+                this.setState(prevState=>({
+                    member : {
+                        ...prevState.member,
+                        [e.target.name]:e.target.value
+                    }
+                }));
+            };
             render(){
-                const {style} = this.state;
-
+                const {member} = this.state;
                 return (
                     <>
-                        <button onClick={()=>{ this.setState(prev=>({ style: {width:100, height:100} })); }}>small</button>
-                        <button onClick={()=>{ this.setState(prev=>({ style: {width:200, height:200} })); }}>normal</button>
-                        <button onClick={()=>{ this.setState(prev=>({ style: {width:300, height:300} })); }}>big</button>
+                        아이디 : <input type="text" name="memberId" onInput={this.setValue}/><br/>
+                        닉네임 : <input type="text" name="memberNick" onInput={this.setValue}/><br/>
+                        전화번호 : <input type="text" name="memberPhone" onInput={this.setValue}/><br/>
                         <hr/>
-                        <img src="./image/background.jpg" style={style}/>
+                        <div>입력된 아이디 : {member.memberId}</div>
+                        <div>입력된 닉네임 : {member.memberNick}</div>
+                        <div>입력된 전화번호 : {member.memberPhone}</div>
                     </>
                 );
             }

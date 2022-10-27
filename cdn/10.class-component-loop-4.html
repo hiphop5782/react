@@ -23,11 +23,36 @@
     <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         class MainComponent extends React.Component {
-            //render 함수 - 화면을 출력하는 함수
+            state = {
+                monsters : ["피카츄", "라이츄", "파이리", "꼬부기", "버터플"]
+            };
+
+            shuffle = e=>{
+                const monstersCopy = [...this.state.monsters];
+                for(var i=0; i < monstersCopy.length; i++){
+                    const pos = Math.floor(Math.random() * monstersCopy.length);
+                    const temp = monstersCopy[pos];
+                    monstersCopy[pos] = monstersCopy[i];
+                    monstersCopy[i] = temp;
+                }
+                this.setState({monsters:monstersCopy});
+            };
+         
             render(){
+                
+                const {monsters} = this.state;
+
+                const monsterList = monsters.map((monster, index) => {
+                    return (
+                        <li key={monster}>{monster}</li>
+                    );
+                });
+
                 return (
                     <>
-                        <h1>This is class component</h1>
+                        <h1>포켓몬스터 목록</h1>
+                        <button onClick={this.shuffle}>섞기</button>
+                        <ul>{monsterList}</ul>
                     </>
                 );
             }
