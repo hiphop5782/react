@@ -31,12 +31,14 @@
         //- const [이름, 세터함수] = React.useState(초기값);
         //- 변경은 반드시 세터함수를 사용해야 함
         function MainComponent(){
-            const [name, setName] = React.useState("피카츄");
-            const [type, setType] = React.useState("전기");
+            const [monster, setMonster] = React.useState({
+                no : 1, name : "이상해씨", type:"풀"
+            });
             return (
                 <>
-                    <h1>이름 : {name}</h1>
-                    <h1>속성 : {type}</h1>
+                    <h1>번호 : {monster.no}</h1>
+                    <h1>이름 : {monster.name}</h1>
+                    <h1>유형 : {monster.type}</h1>
                 </>
             );
         }

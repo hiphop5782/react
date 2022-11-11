@@ -31,12 +31,13 @@
         //- const [이름, 세터함수] = React.useState(초기값);
         //- 변경은 반드시 세터함수를 사용해야 함
         function MainComponent(){
-            const [name, setName] = React.useState("피카츄");
-            const [type, setType] = React.useState("전기");
+            const [numbers, setNumbers] = React.useState([10, 20, 30]);
+
+            const view = numbers.map(number=><li>{number}</li>);
             return (
                 <>
-                    <h1>이름 : {name}</h1>
-                    <h1>속성 : {type}</h1>
+                    <h1>숫자 목록</h1>
+                    <ul>{view}</ul>
                 </>
             );
         }

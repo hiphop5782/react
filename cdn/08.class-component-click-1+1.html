@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //react component class
+        //- 클래스 형태로 작성하며 자바와 유사한 형태를 가짐
+        //- React.Component를 상속받아 구현
+        //- constructor - 생성자 함수. 속성 설정 및 기본 데이터 초기화
+        //- render - 렌더링 함수
+        //- state - Component에서 사용하는 내부 데이터
+        class MainComponent extends React.Component {
+            //state는 이 컴포넌트에서 사용할 데이터를 객체로 정의한다.
+            //변경은 setState 함수를 사용한다
+            state = {
+                color:"black",
+            };
+            red = e=>{
+                this.setState({ color : "red" });
+            };
+            green = e=>{
+                this.setState({color : "green"});
+            };
+            blue = e=>{
+                this.setState({color : "blue"});
+            };
+            black = e=>{
+                this.setState({color : "black"});
+            };
+            render(){
+                const {color} = this.state;
+
+                return (
+                    <>
+                        <button onClick={this.red}>red</button>
+                        <button onClick={this.green}>green</button>
+                        <button onClick={this.blue}>blue</button>
+                        <button onClick={this.black}>black</button>
+                        <h1 style={{color:color}}>This is react component</h1>
+                    </>
+                );
+            }
+        }
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(
+            //class 이름을 태그로 사용
+            <MainComponent/>
+        );
+    </script>
+</body>
+</html>
