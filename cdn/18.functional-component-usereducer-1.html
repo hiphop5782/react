@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN Example</title>
+    
+</head>
+<body>
+
+    <div id="app"></div>
+    
+    <!-- 개발용 CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 배포용 CDN -->
+    <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> -->
+    <!-- <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> -->
+
+    <!-- 바벨 CDN(using JSX) -->
+    <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //함수형 컴포넌트(Functional Component)
+        //- 클래스보다 간소화된 컴포넌트 형태
+        //- 초기화 및 사용 방법이 다름
+        //- 함수 이름이 태그 이름이며, JSX를 반환하도록 작성해야함
+
+        //state는 useState 함수로 선언
+        //- const [이름, 세터함수] = React.useState(초기값);
+        //- 변경은 반드시 세터함수를 사용해야 함
+
+        //effect는 useEffect 함수로 선언
+        //- 자동계산이 필요한 항목에 적용
+
+        //reducer는 다양한 상태의 state 변화를 적용할 수 있는 도구
+        function MainComponent(){
+            const [total, setTotal] = React.useState(0);
+            
+            const minusOne = e=>{
+                if(total < 1) return;
+                setTotal(total - 1);
+            };
+            const minusTen = e=>{
+                if(total < 10) {
+                    setTotal(0);
+                }
+                else {
+                    setTotal(total - 10);
+                }
+            };
+            const plusOne = e=>{
+                setTotal(total + 1);
+            };
+            const plusTen = e=>{
+                setTotal(total + 10);
+            }
+            return (
+                <>
+                    <h1>충전할 달풍선 개수를 선택하세요</h1>
+                    <button onClick={minusTen}>-10개</button>
+                    <button onClick={minusOne}>-1개</button>
+                    <button onClick={plusOne}>+1개</button>
+                    <button onClick={plusTen}>+10개</button>
+                    <hr/>
+                    <h2>충전할 총 달풍선 개수 : {total}개</h2>
+                </>
+            );
+        }
+
+        const app = ReactDOM.createRoot(document.querySelector("#app"));
+        app.render(<MainComponent/>);
+    </script>
+</body>
+</html>
