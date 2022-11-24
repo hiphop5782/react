@@ -32,28 +32,25 @@
             //state는 이 컴포넌트에서 사용할 데이터를 객체로 정의한다.
             //변경은 setState 함수를 사용한다
             state = {
-                size:16,
+                size:16
             };
 
-            increase(e){
+            //바벨의 transform-class-properties 문법을 사용하여 바인딩을 자동으로 처리
+            increase = (e)=>{
                 // console.log(this);
                 const {size} = this.state;
                 this.setState({size:size+1});
             }
-
-            decrease(e){
+            //아래 형태는 불가
+            // increase = function(e){
+            //     const {size} = this.state;
+            //     this.setState({size:size+1});
+            // };
+            decrease = (e)=>{
                 const {size} = this.state;
                 this.setState({size:size-1});
             }
 
-            //field를 따로 생성하지 않는다(생성자에서 필요에 따라 추가)
-            constructor(){
-                super();//반드시 작성해야함
-
-                //함수에서 this를 온전하게 사용하기 위한 설정
-                this.increase = this.increase.bind(this);
-                this.decrease = this.decrease.bind(this);
-            }
             render(){
                 const {size} = this.state;
 
@@ -74,7 +71,7 @@
                     </>
                 );
             }
-
+            
         }
 
         const app = ReactDOM.createRoot(document.querySelector("#app"));

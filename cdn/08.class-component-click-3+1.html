@@ -49,10 +49,6 @@
             //field를 따로 생성하지 않는다(생성자에서 필요에 따라 추가)
             constructor(){
                 super();//반드시 작성해야함
-
-                //함수에서 this를 온전하게 사용하기 위한 설정
-                this.increase = this.increase.bind(this);
-                this.decrease = this.decrease.bind(this);
             }
             render(){
                 const {size} = this.state;
@@ -60,9 +56,9 @@
                 //이벤트 처리내용이 복잡할 경우 외부 함수로 처리
                 return (
                     <>
-                        <button onClick={this.decrease}>-</button>
+                        <button onClick={()=>this.decrease.call(this)}>-</button>
                         <span>{size}</span>
-                        <button onClick={this.increase}>+</button>
+                        <button onClick={()=>this.increase.call(this)}>+</button>
                         <hr/>
                         <p style={{fontSize:size}}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat egestas lacus, eu mollis massa elementum vel. In eleifend metus quis dui maximus feugiat. Nunc aliquet laoreet libero, ornare molestie sapien mattis id. Sed ut sagittis sapien. Maecenas ut magna ut libero condimentum scelerisque at vitae tortor. Vestibulum ut ligula quis eros ullamcorper lobortis. Maecenas nec lacus lacinia, consectetur neque ut, mattis leo. Integer convallis interdum mauris sit amet porta.
