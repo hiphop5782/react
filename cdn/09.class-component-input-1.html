@@ -43,7 +43,7 @@
                 const {text} = this.state;
                 return (
                     <>
-                        <input type="text" onInput={this.setText}/>
+                        <input type="text" onChange={this.setText}/>
                         <hr/>
                         <span>입력 글자 수 : {text.length}</span>
                     </>

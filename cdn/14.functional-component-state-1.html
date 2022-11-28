@@ -32,9 +32,15 @@
         //- 변경은 반드시 세터함수를 사용해야 함
         function MainComponent(){
             const [name, setName] = React.useState("피카츄");
+            const [korean, setKorean] = React.useState(50);
+            const [english, setEnglish] = React.useState(50);
+            const [math, setMath] = React.useState(50);
+            const [total, setTotal] = React.useState(korean+english+math);
+            const [average, setAverage] = React.useState(total/3);
             return (
                 <>
                     <h1>Name is {name}</h1>
+                    <h1>{korean}, {english}, {math}, {total}, {average}</h1>
                 </>
             );
         }
